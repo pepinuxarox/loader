@@ -19,10 +19,6 @@ public class Entity {
 	private String source;
 	private String OriginalSource;	
 	
-	
-	public Entity() {
-		super();
-	}
 	@XmlAttribute
 	public int getId() {
 		return id;
