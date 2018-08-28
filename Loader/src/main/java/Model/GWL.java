@@ -1,5 +1,8 @@
 package Model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="gwl")
 public class GWL {
 
 	
