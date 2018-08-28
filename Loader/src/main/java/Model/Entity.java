@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,7 +19,10 @@ public class Entity {
 	private String createdDate;
 	private String lastUpdateDate;
 	private String source;
+	@XmlElement
 	private String OriginalSource;	
+	private DOBS dobs;
+	
 	
 	@XmlAttribute
 	public int getId() {
@@ -83,14 +88,19 @@ public class Entity {
 	public void setSource(String source) {
 		this.source = source;
 	}
-	@XmlElement
+	
 	public String getOriginalSource() {
 		return OriginalSource;
 	}
 	public void setOriginalSource(String originalSource) {
 		OriginalSource = originalSource;
 	}
-	
+	public DOBS getDobs() {
+		return dobs;
+	}
+	public void setDobs(DOBS dobs) {
+		this.dobs = dobs;
+	}
 	
 	
 }

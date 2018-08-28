@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import DAO.ConnectDatabase;
+import DTO.DOBDTO;
 import DTO.EntityDTO;
 
 public class Ctrol {
@@ -14,6 +15,35 @@ public class Ctrol {
 	//private List<Case> caseList = new ArrayList<Case>();
 	private StringBuilder filter= new StringBuilder();
 	private BufferedWriter log;
+	
+	public boolean SP_Historicos(String listName) {
+		ConnectDatabase connect = new ConnectDatabase();
+		Statement state = null;
+		boolean out = false;
+
+		try {
+			state = connect.getConnection().createStatement();
+			filter.setLength(0);
+			filter.append(" @type_list ='").append(listName).append("'");
+			state.executeUpdate("SP_historicos".concat(filter.toString()));
+			//logDet.write("SP_histoiricos".concat(filter.toString()));
+			
+		}catch (Exception e) {
+			System.out.println("error: " + e + "\n\n\n");
+//			Logger.getLogger(QueryCasesServices.class.getName()).log(Level.SEVERE, null, e);
+		} finally {
+			if (state != null) {
+				try {
+					state.close();
+					connect.connection.close();
+					out =true;
+				} catch (SQLException ex) {
+//					Logger.getLogger(QueryCasesServices.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+		}		
+		return out;		
+	}
 	
 	public boolean SP_entity(EntityDTO eDTO) {
 		ConnectDatabase connect = new ConnectDatabase();
@@ -33,7 +63,7 @@ public class Ctrol {
 			filter.append(",@CreatedDate ='").append(eDTO.getEntity().getCreatedDate().replaceAll("'","")).append("'");		
 			filter.append(",@LastUpdateDate ='").append(eDTO.getEntity().getLastUpdateDate().replaceAll("'","")).append("'");		
 			filter.append(",@Source ='").append(eDTO.getEntity().getSource().replaceAll("'","")).append("'");		
-			filter.append(",@OriginalSource ='").append(eDTO.getEntity().getOriginalSource().replaceAll("'","")).append("'");
+			filter.append(",@OriginalSource ='").append(eDTO.getEntity().getOriginalSource()).append("'");
 			filter.append(",@list_type ='").append(eDTO.getListType()).append("'");
 			state.executeQuery("SP_entity ".concat(filter.toString()));
 			//logDet.write("SP_entity".concat(filter.toString()));
@@ -56,6 +86,40 @@ public class Ctrol {
 		return out;		
 	}
 	
-	
+	public boolean SP_dob(DOBDTO dobDTO) {
+		ConnectDatabase connect = new ConnectDatabase();
+		Statement state = null;
+		boolean out = false;
+
+		try {
+			state = connect.getConnection().createStatement();
+
+			filter.setLength(0);
+			filter.append(" @Id ='").append(dobDTO.getId()).append("'");
+			filter.append(",@Dob ='").append(dobDTO.getDob().getValue()).append("'");
+			filter.append(",@Dob_A ='").append(dobDTO.getDob().getA()).append("'");
+			filter.append(",@Dob_D ='").append(dobDTO.getDob().getD()).append("'");
+			filter.append(",@Dob_M ='").append(dobDTO.getDob().getM()).append("'");
+			filter.append(",@Dob_Y ='").append(dobDTO.getDob().getY()).append("'");	
+			filter.append(",@list_type ='").append(dobDTO.getListType()).append("'");
+			state.executeQuery("SP_dob".concat(filter.toString()));
+			//logDet.write("SP_dob".concat(filter.toString()));
+			
+		}catch (Exception e) {
+			System.out.println("error: " + e + "\n\n\n");
+//			Logger.getLogger(QueryCasesServices.class.getName()).log(Level.SEVERE, null, e);
+		} finally {
+			if (state != null) {
+				try {
+					state.close();
+					connect.connection.close();
+					out =true;
+				} catch (SQLException ex) {
+//					Logger.getLogger(QueryCasesServices.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+		}		
+		return out;		
+	}
 	
 }
