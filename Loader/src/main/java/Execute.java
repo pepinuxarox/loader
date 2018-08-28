@@ -4,6 +4,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import Controller.Ctrol;
+import DTO.EntityDTO;
 import Model.Entity;
 import Model.GWL;
 
@@ -19,10 +21,16 @@ public class Execute {
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			GWL gwl = (GWL) jaxbUnmarshaller.unmarshal(file);
 
-			
+			Ctrol ctrol= new Ctrol();
 			System.out.println("Inicia el proceso");
 			for (Entity e : gwl.getEntities().getEntity()) {
-				System.out.println(e.getName());
+				EntityDTO eDTO= new EntityDTO();
+				eDTO.setEntity(e);
+				eDTO.setListType("EDD");
+				
+				ctrol.SP_entity(eDTO);
+				
+				System.out.println("Guardando"+e.getName());
 			}
 
 

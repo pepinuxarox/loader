@@ -40,7 +40,7 @@ public class Ctrol {
 							
 		}catch (Exception e) {
 			//logDet.write("Error: " + e.getMessage());  
-			System.out.println("error: " + e + "\n\n\n");
+			System.out.println("error: " + e+ "\n\n\n");
 //			Logger.getLogger(QueryCasesServices.class.getName()).log(Level.SEVERE, null, e);
 		} finally {
 			if (state != null) {
