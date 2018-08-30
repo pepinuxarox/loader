@@ -1,6 +1,6 @@
-package DTO;
+package dto;
 
-import Model.DOB;
+import model.DOB;
 
 public class DOBDTO {
 
@@ -11,7 +11,6 @@ public class DOBDTO {
 	
 	public DOBDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public String getId() {
 		return id;

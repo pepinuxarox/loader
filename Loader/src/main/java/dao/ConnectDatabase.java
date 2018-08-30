@@ -1,11 +1,11 @@
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectDatabase {
-	  public Connection connection = null;
+	  public Connection connection ;
 	  PropertiesReader dataDB = new PropertiesReader();
 	
 	public Connection getConnection() throws SQLException, ClassNotFoundException {

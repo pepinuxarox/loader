@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
@@ -8,10 +8,10 @@ public class DOB {
 
 	
 	private String value;
-	private String A;
-	private String D;
-	private String M;
-	private String Y;
+	private String a;
+	private String d;
+	private String m;
+	private String y;
 	
 	
 	
@@ -23,36 +23,32 @@ public class DOB {
 		this.value = value;
 	}
 	public String getA() {
-		return A;
+		return a;
 	}
 	@XmlAttribute(name="A")
 	public void setA(String a) {
-		A = a;
+		this.a = a;
 	}
 	public String getD() {
-		return D;
+		return d;
 	}
 	@XmlAttribute(name="D")
 	public void setD(String d) {
-		D = d;
+		this.d = d;
 	}
 	public String getM() {
-		return M;
+		return m;
 	}
 	@XmlAttribute(name="M")
 	public void setM(String m) {
-		M = m;
+		this.m = m;
 	}
 	public String getY() {
-		return Y;
+		return y;
 	}
 	@XmlAttribute(name="Y")
 	public void setY(String y) {
-		Y = y;
-	}
-	@Override
-	public String toString() {
-		return "DOB [value=" + value + ", A=" + A + ", D=" + D + ", M=" + M + ", Y=" + Y + "]";
+		this.y = y;
 	}
 	
 	

@@ -1,22 +1,22 @@
-package Controller;
+package controller;
 
-import java.io.BufferedWriter;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import DAO.ConnectDatabase;
-import DTO.DOBDTO;
-import DTO.EntityDTO;
+import dao.ConnectDatabase;
+import dto.DOBDTO;
+import dto.EntityDTO;
+import main.Execute;
 
 public class Ctrol {
 
-	private ConnectDatabase connect = new ConnectDatabase();
 
-	//private List<Case> caseList = new ArrayList<Case>();
 	private StringBuilder filter= new StringBuilder();
-	private BufferedWriter log;
 	
-	public boolean SP_Historicos(String listName) {
+	
+	public boolean spHistoricos(String listName) {
 		ConnectDatabase connect = new ConnectDatabase();
 		Statement state = null;
 		boolean out = false;
@@ -26,11 +26,9 @@ public class Ctrol {
 			filter.setLength(0);
 			filter.append(" @type_list ='").append(listName).append("'");
 			state.executeUpdate("SP_historicos".concat(filter.toString()));
-			//logDet.write("SP_histoiricos".concat(filter.toString()));
 			
 		}catch (Exception e) {
-			System.out.println("error: " + e + "\n\n\n");
-//			Logger.getLogger(QueryCasesServices.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(Execute.class.getName()).log(Level.SEVERE,null, e);
 		} finally {
 			if (state != null) {
 				try {
@@ -38,14 +36,14 @@ public class Ctrol {
 					connect.connection.close();
 					out =true;
 				} catch (SQLException ex) {
-//					Logger.getLogger(QueryCasesServices.class.getName()).log(Level.SEVERE, null, ex);
+					Logger.getLogger(Execute.class.getName()).log(Level.SEVERE,null, ex);
 				}
 			}
 		}		
 		return out;		
 	}
 	
-	public boolean SP_entity(EntityDTO eDTO) {
+	public boolean spEntity(EntityDTO eDTO) {
 		ConnectDatabase connect = new ConnectDatabase();
 		Statement state = null;
 		boolean out = false;
@@ -66,12 +64,9 @@ public class Ctrol {
 			filter.append(",@OriginalSource ='").append(eDTO.getEntity().getOriginalSource()).append("'");
 			filter.append(",@list_type ='").append(eDTO.getListType()).append("'");
 			state.executeQuery("SP_entity ".concat(filter.toString()));
-			//logDet.write("SP_entity".concat(filter.toString()));
 							
 		}catch (Exception e) {
-			//logDet.write("Error: " + e.getMessage());  
-			System.out.println("error: " + e+ "\n\n\n");
-//			Logger.getLogger(QueryCasesServices.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(Execute.class.getName()).log(Level.SEVERE,null, e);
 		} finally {
 			if (state != null) {
 				try {
@@ -79,14 +74,14 @@ public class Ctrol {
 					connect.connection.close();
 					out =true;
 				} catch (SQLException ex) {
-//					Logger.getLogger(QueryCasesServices.class.getName()).log(Level.SEVERE, null, ex);
+					Logger.getLogger(Execute.class.getName()).log(Level.SEVERE,null, ex);
 				}
 			}
 		}		
 		return out;		
 	}
 	
-	public boolean SP_dob(DOBDTO dobDTO) {
+	public boolean spDob(DOBDTO dobDTO) {
 		ConnectDatabase connect = new ConnectDatabase();
 		Statement state = null;
 		boolean out = false;
@@ -103,11 +98,9 @@ public class Ctrol {
 			filter.append(",@Dob_Y ='").append(dobDTO.getDob().getY()).append("'");	
 			filter.append(",@list_type ='").append(dobDTO.getListType()).append("'");
 			state.executeQuery("SP_dob".concat(filter.toString()));
-			//logDet.write("SP_dob".concat(filter.toString()));
 			
 		}catch (Exception e) {
-			System.out.println("error: " + e + "\n\n\n");
-//			Logger.getLogger(QueryCasesServices.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(Execute.class.getName()).log(Level.SEVERE,null, e);
 		} finally {
 			if (state != null) {
 				try {
@@ -115,8 +108,8 @@ public class Ctrol {
 					connect.connection.close();
 					out =true;
 				} catch (SQLException ex) {
-//					Logger.getLogger(QueryCasesServices.class.getName()).log(Level.SEVERE, null, ex);
-				}
+					Logger.getLogger(Execute.class.getName()).log(Level.SEVERE,null, ex);}
+				
 			}
 		}		
 		return out;		

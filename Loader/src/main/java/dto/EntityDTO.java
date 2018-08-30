@@ -1,6 +1,6 @@
-package DTO;
+package dto;
 
-import Model.Entity;
+import model.Entity;
 
 public class EntityDTO {
 	

@@ -1,6 +1,4 @@
-package Model;
-
-import java.util.List;
+package model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -20,6 +18,7 @@ public class Entity {
 	private String lastUpdateDate;
 	private String source;
 	@XmlElement
+	//variable con ese valor desde BD,no se puede modificar.
 	private String OriginalSource;	
 	private DOBS dobs;
 	
@@ -93,7 +92,7 @@ public class Entity {
 		return OriginalSource;
 	}
 	public void setOriginalSource(String originalSource) {
-		OriginalSource = originalSource;
+		this.OriginalSource = originalSource;
 	}
 	public DOBS getDobs() {
 		return dobs;

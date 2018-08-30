@@ -1,8 +1,12 @@
-package DAO;
+package dao;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import main.Execute;
 
 public class PropertiesReader {
 
@@ -11,6 +15,7 @@ public class PropertiesReader {
 	private String userDwh;
 	private String passDwh;
 	private String filePath;
+	private static final String DBPROPERTIES= "db.properties";
 	
 	public PropertiesReader(){
 		getDataHost();
@@ -20,28 +25,30 @@ public class PropertiesReader {
 
 	public void getDataHost() {
 		try {
-			Properties prop_db = new Properties();
-			String pathProp = new File("").getAbsolutePath().concat(FOLDER_PATH_PROP.concat("db.properties"));
+			Properties propDb = new Properties();
+			String pathProp = new File("").getAbsolutePath().concat(FOLDER_PATH_PROP.concat(DBPROPERTIES));
 			FileInputStream file = new FileInputStream(pathProp);
-			prop_db.load(file);
+			propDb.load(file);
 			file.close();
-			this.setHostDwh("jdbc:jtds:sqlserver://" + prop_db.getProperty("SQL_IP") + ":"
-					+ prop_db.getProperty("SQL_PORT") + "/" + prop_db.getProperty("SQL_DB_DWH"));		
+			this.setHostDwh("jdbc:jtds:sqlserver://" + propDb.getProperty("SQL_IP") + ":"
+					+ propDb.getProperty("SQL_PORT") + "/" + propDb.getProperty("SQL_DB_DWH"));		
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			Logger.getLogger(Execute.class.getName()).log(Level.SEVERE,null, e);
 		}
 	}
 	
 	public String getDataUser() {
 		try {
-			Properties prop_db = new Properties();
-			String pathProp = new File("").getAbsolutePath().concat(FOLDER_PATH_PROP.concat("db.properties"));
+			Properties propDb = new Properties();
+			String pathProp = new File("").getAbsolutePath().concat(FOLDER_PATH_PROP.concat(DBPROPERTIES));
 			FileInputStream file = new FileInputStream(pathProp);
-			prop_db.load(file);
+			propDb.load(file);
 			file.close();
-            this.setUserDwh(prop_db.getProperty("SQL_USER_DWH"));   
+            this.setUserDwh(propDb.getProperty("SQL_USER_DWH"));   
             
-        }catch (Exception e){ System.out.println(e.getMessage());}
+        }catch (Exception e){ 
+        	Logger.getLogger(Execute.class.getName()).log(Level.SEVERE,null, e);
+        	}
 		
 		return userDwh;
 	}
@@ -49,26 +56,30 @@ public class PropertiesReader {
 
 	public String getDataPass() {
 		try {
-			Properties prop_db = new Properties();
-			String pathProp = new File("").getAbsolutePath().concat(FOLDER_PATH_PROP.concat("db.properties"));
+			Properties propDb = new Properties();
+			String pathProp = new File("").getAbsolutePath().concat(FOLDER_PATH_PROP.concat(DBPROPERTIES));
 			FileInputStream file = new FileInputStream(pathProp);
-			prop_db.load(file);
+			propDb.load(file);
 			file.close();
-            this.setPassDwh(prop_db.getProperty("SQL_PASSWORD_DWH"));        
-        }catch (Exception e){ System.out.println(e.getMessage());}
+            this.setPassDwh(propDb.getProperty("SQL_PASSWORD_DWH"));        
+        }catch (Exception e){ 
+        	Logger.getLogger(Execute.class.getName()).log(Level.SEVERE,null, e);
+        	}
 		
 		return passDwh;
 	}
 	
 	public String getFilePath() {
 		try {
-			Properties prop_db = new Properties();
-			String pathProp = new File("").getAbsolutePath().concat(FOLDER_PATH_PROP.concat("db.properties"));
+			Properties propDb = new Properties();
+			String pathProp = new File("").getAbsolutePath().concat(FOLDER_PATH_PROP.concat(DBPROPERTIES));
 			FileInputStream file = new FileInputStream(pathProp);
-			prop_db.load(file);
+			propDb.load(file);
 			file.close();
-            this.setFilePath(prop_db.getProperty("FILE_PATH"));        
-        }catch (Exception e){ System.out.println(e.getMessage());}
+            this.setFilePath(propDb.getProperty("FILE_PATH"));        
+        }catch (Exception e){
+        	Logger.getLogger(Execute.class.getName()).log(Level.SEVERE,null, e);
+        	}
 		
 		return filePath;
 	}
